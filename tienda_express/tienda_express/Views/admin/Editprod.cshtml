@@ -1,0 +1,123 @@
+﻿@model tienda_express.Models.producto
+
+@{
+    //Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar producto</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+
+</head>
+<body>
+<center><h3>Editar producto</h3></center>
+
+
+    @using (Html.BeginForm("edprodc", "admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.id, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.id)
+                    @Html.ValidationMessageFor(model => model.id)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.foto, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="file" value="file">
+                    <img src="@Url.Action("getimagen", "admin", new { id = Model.id }) " width="120" height="120">
+                    @Html.ValidationMessageFor(model => model.foto)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nombre)
+                    @Html.ValidationMessageFor(model => model.nombre)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.descripcion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.descripcion)
+                    @Html.ValidationMessageFor(model => model.descripcion)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.fecha_creacion, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fecha_creacion)
+                    @Html.ValidationMessageFor(model => model.fecha_creacion)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.precio, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.precio)
+                    @Html.ValidationMessageFor(model => model.precio)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.stock, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.stock)
+                    @Html.ValidationMessageFor(model => model.stock)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.cat_id, "cat_id", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cat_id)
+                    @Html.ValidationMessageFor(model => model.cat_id)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" name="Modificar" value="Modificar" id="Modificar" class="btn btn-success">Modificar</button>
+                    &nbsp;
+                    <button type="reset" name="Cancelar" value="Cancelar" id="Cancelar" class="btn btn-danger">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    }
+    <center>
+        <div>
+            @Html.ActionLink("Volver al inicio", "Index_admin")|
+            @Html.ActionLink("Volver al listado", "lprod")|
+
+        </div>
+    </center>
+</body>
+</html>

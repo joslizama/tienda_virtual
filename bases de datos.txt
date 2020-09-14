@@ -1,0 +1,57 @@
+create table [dbo].[tipo]
+(
+[id]  int primary key identity(1,1),
+[nombre] varchar(100),
+); 
+
+create table [dbo].[usuario]
+(
+[id]  varchar(100) primary key,
+[nombre] varchar(100),
+[apellido] varchar(100),
+[direccion] varchar(100),
+[clave] varchar(100),
+[tipo_id] int foreign key references tipo(id),
+);
+
+create table [dbo].[categoria]
+(
+[id]  int primary key identity(1,1),
+[nombre] varchar(100),
+);  
+
+create table [dbo].[producto]
+(
+[id]  int primary key identity(1,1),
+[foto] varbinary(max),
+[nombre] varchar(100),
+[descripcion] varchar(100),
+[fecha_creacion] date,
+[precio] float,
+[stock] int,
+[cat_id] int foreig key references categoria(id),
+);  
+
+create table [dbo].[venta]
+(
+[id] int primary key identity(1,1),
+[dia_venta] date,
+[sub_total] float,
+[iva] float,
+[total] float,
+[usuario_id] varchar(100) foreig key references usuario(rut),
+);
+
+create table [dbo].[lista_venta]
+(
+[id] int primary key identity(1,1),
+[venta_id] int foreig key references venta(id),
+[prodcuto_id] int foreig key references producto(id),
+[cantidad] int
+[total] float
+
+);
+
+
+
+

@@ -1,0 +1,85 @@
+﻿@model tienda_express.Models.categoria
+
+@{
+    //Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+    
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar categoria</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+</head>
+<body>
+
+<center><h3>Editar categoria de producto</h3></center>
+<br />
+    <center>
+        <div>
+            @Html.ActionLink("Volver al listado ", "lcat")|
+            @Html.ActionLink("Volver al inicio ", "Index_admin")|
+
+        </div>
+    </center>
+
+
+    @using (Html.BeginForm("modcatc","admin",FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        
+        <table border="1" align="center" class="border border-dark">
+        <tr>
+        <td><label>ID : </label></td>
+        <td>@Html.EditorFor(model => model.id)</td>
+        </tr>
+        <tr>
+        <td><label>Nombre categoria : </label></td>
+        <td>@Html.EditorFor(model => model.nombre)</td>
+        </tr>
+        <tr>
+        <td colspan="2" align="center">
+
+            <button type="submit" name="Modificar" value="Modificar" id="Modificar" class="btn btn-success">Modificar</button>
+            &nbsp;
+            <button type="reset" name="Cancelar" value="Cancelar" id="Cancelar" class="btn btn-danger">Cancelar</button>
+
+
+
+
+        </td>
+        </tr>
+        
+        </table>
+    }
+    
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#Modificar").click(function () {
+
+            alert("Campos modificados");
+
+
+        });
+    });
+
+
+
+
+</script>

@@ -1,0 +1,33 @@
+﻿
+@{
+    // Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mensaje</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+
+
+</head>
+<body>
+    <center><h3>No tiene productos en el carro de compras</h3></center>
+    <center>
+    <h5><a href="@Url.Action("Index_usuario","usuario")">Volver al inicio</a></h5>|<h5><a href="@Url.Action("vcat","usuario")">Ver catalogo</a></h5>
+    </center>
+</body>
+</html>

@@ -1,0 +1,7 @@
+tienda virtual express demo
+funcional mantenedores de usuario
+carro de compras 
+bootstrap basico
+js jquery validar campos 
+
+este proyecto es para realizar desmostraciones.

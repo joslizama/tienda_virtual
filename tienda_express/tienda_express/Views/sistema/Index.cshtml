@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+    <center><h3>Bienvenido al sitio web</h3></center>
+    <table border="1" align="center" class="border border-dark">
+    <tr>
+    <td><label><a href="@Url.Action("log","sistema")">Portal del usuario</a></label></td>
+    <td><label><a href="@Url.Action("reg","sistema")">Registrarse</a></label></td>
+    </tr>
+
+    </table>
+
+
+
+
+</body>
+</html>

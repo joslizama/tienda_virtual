@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="texpressdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="categoria">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="producto" Relationship="Self.FK__producto__cat_id__1273C1CD" FromRole="categoria" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="lista_venta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="venta_id" Type="Int32" />
+    <Property Name="producto_id" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" />
+    <Property Name="total" Type="Double" />
+    <NavigationProperty Name="producto" Relationship="Self.FK__lista_ven__produ__182C9B23" FromRole="lista_venta" ToRole="producto" />
+    <NavigationProperty Name="venta" Relationship="Self.FK__lista_ven__venta__173876EA" FromRole="lista_venta" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Precision="0" />
+    <Property Name="precio" Type="Double" />
+    <Property Name="stock" Type="Int32" />
+    <Property Name="cat_id" Type="Int32" />
+    <NavigationProperty Name="categoria" Relationship="Self.FK__producto__cat_id__1273C1CD" FromRole="producto" ToRole="categoria" />
+    <NavigationProperty Name="lista_venta" Relationship="Self.FK__lista_ven__produ__182C9B23" FromRole="producto" ToRole="lista_venta" />
+  </EntityType>
+  <EntityType Name="tipo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__tipo_id__0519C6AF" FromRole="tipo" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="rut" />
+    </Key>
+    <Property Name="rut" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="tipo_id" Type="Int32" />
+    <NavigationProperty Name="tipo" Relationship="Self.FK__usuario__tipo_id__0519C6AF" FromRole="usuario" ToRole="tipo" />
+    <NavigationProperty Name="venta" Relationship="Self.FK__venta__usuario_i__09DE7BCC" FromRole="usuario" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="venta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dia_venta" Type="DateTime" Precision="0" />
+    <Property Name="sub_total" Type="Double" />
+    <Property Name="iva" Type="Double" />
+    <Property Name="total" Type="Double" />
+    <Property Name="usuario_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="lista_venta" Relationship="Self.FK__lista_ven__venta__173876EA" FromRole="venta" ToRole="lista_venta" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__venta__usuario_i__09DE7BCC" FromRole="venta" ToRole="usuario" />
+  </EntityType>
+  <Association Name="FK__producto__cat_id__1273C1CD">
+    <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+    <End Role="producto" Type="Self.producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoria">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="producto">
+        <PropertyRef Name="cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lista_ven__produ__182C9B23">
+    <End Role="producto" Type="Self.producto" Multiplicity="0..1" />
+    <End Role="lista_venta" Type="Self.lista_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="lista_venta">
+        <PropertyRef Name="producto_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lista_ven__venta__173876EA">
+    <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
+    <End Role="lista_venta" Type="Self.lista_venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="venta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="lista_venta">
+        <PropertyRef Name="venta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario__tipo_id__0519C6AF">
+    <End Role="tipo" Type="Self.tipo" Multiplicity="0..1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="tipo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__venta__usuario_i__09DE7BCC">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="venta" Type="Self.venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="rut" />
+      </Principal>
+      <Dependent Role="venta">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ejemplodatacontext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categoria" EntityType="Self.categoria" />
+    <EntitySet Name="lista_venta" EntityType="Self.lista_venta" />
+    <EntitySet Name="producto" EntityType="Self.producto" />
+    <EntitySet Name="tipo" EntityType="Self.tipo" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <EntitySet Name="venta" EntityType="Self.venta" />
+    <AssociationSet Name="FK__producto__cat_id__1273C1CD" Association="Self.FK__producto__cat_id__1273C1CD">
+      <End Role="categoria" EntitySet="categoria" />
+      <End Role="producto" EntitySet="producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lista_ven__produ__182C9B23" Association="Self.FK__lista_ven__produ__182C9B23">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="lista_venta" EntitySet="lista_venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lista_ven__venta__173876EA" Association="Self.FK__lista_ven__venta__173876EA">
+      <End Role="venta" EntitySet="venta" />
+      <End Role="lista_venta" EntitySet="lista_venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario__tipo_id__0519C6AF" Association="Self.FK__usuario__tipo_id__0519C6AF">
+      <End Role="tipo" EntitySet="tipo" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__venta__usuario_i__09DE7BCC" Association="Self.FK__venta__usuario_i__09DE7BCC">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="venta" EntitySet="venta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

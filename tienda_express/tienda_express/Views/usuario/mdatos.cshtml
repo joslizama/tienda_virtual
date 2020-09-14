@@ -1,0 +1,98 @@
+﻿@model tienda_express.Models.usuario
+
+@{
+    // Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Modificar datos</title>
+
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+
+</head>
+<body>
+<center><h3>Modificar datos de usuario @Session["n"].ToString() @Session["a"].ToString()</h3></center>
+
+
+    @using (Html.BeginForm("modusuarioc","usuario"))
+    {
+        
+       <table border="1" align="center" class="border border-dark">
+       <tr>
+        <td><label>Rut : </label></td>
+        <td>@Html.EditorFor(x=>x.rut)</td>
+       </tr>
+       <tr>
+       <td><label>Nombre : </label></td>
+       <td>@Html.EditorFor(x=>x.nombre)</td>
+       </tr>
+       <tr>
+        <td><label>Apellido : </label></td>
+        <td>@Html.EditorFor(x => x.apellido)</td>
+       </tr>
+        <tr>
+        <td><label>Direccion : </label></td>
+        <td>@Html.EditorFor(x => x.direccion)</td>
+        </tr>
+        <tr>
+        <td><label>Clave : </label></td>
+        <td>@Html.EditorFor(x => x.clave)</td>
+        </tr>
+        @*<tr>
+        <td><label>Tipo usuario : </label></td>
+        <td>
+        <select name="tus" id="tus">
+        <option value="2">Usuario normal</option>
+        </select>
+        </td>
+        </tr>*@
+        <tr>
+        <td colspan="2" align="center">
+            <button type="submit" name="Modificar" value="Modificar" id="Modificar" class="btn btn-success">Modificar</button>
+            &nbsp;
+            <button type="reset" name="Cancelar" value="Cancelar" id="Cancelar" class="btn btn-danger">Cancelar</button>
+        </td>
+        </tr>
+       </table>
+    }
+    <center>
+    <div>
+        @Html.ActionLink("Volver al inicio", "Index_usuario")
+    </div>
+    </center>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#Modificar").click(function () {
+
+            alert("Datos modificados");
+
+
+
+
+        });
+
+
+
+    });
+
+    
+
+</script>

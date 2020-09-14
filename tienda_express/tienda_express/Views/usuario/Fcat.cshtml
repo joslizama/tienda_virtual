@@ -1,0 +1,69 @@
+﻿@model IEnumerable<tienda_express.Models.categoria>
+
+@{
+    //Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+    
+    
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Filtar por categoria</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+</head>
+<body>
+<center><h3>Filtrar por categoria</h3></center>
+    <form action="fcatc" method="post">
+        <table border="1" align="center" class="border border-dark">
+            <tr>
+                <td><label>Seleccionar categoria : </label></td>
+                <td>
+                    <select name="bprod" id="bprod">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@Html.DisplayFor(modelItem => item.id)">@Html.DisplayFor(modelItem => item.nombre)</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" name="Buscar" value="Buscar" id="Buscar" class="btn btn-success">Buscar</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#Buscar").click(function () {
+
+            var buscar = $("#bprod").val();
+
+            if (buscar == null || buscar == "")
+            {
+                alert("Debe completar los campos");
+            } else {
+
+                alert("Buscando producto...");
+            }
+
+
+        });
+    });
+
+</script>

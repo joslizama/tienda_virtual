@@ -1,0 +1,120 @@
+﻿@model IEnumerable<tienda_express.Models.categoria>
+
+@{
+    //Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Nuevo producto</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+
+</head>
+<body>
+<center><h3>Nuevo producto</h3></center>
+    <center>
+        <p>
+            @Html.ActionLink("Volver al inicio", "Index_admin")|
+            @Html.ActionLink("Volver al listado de productos", "lprod")|
+
+        </p>
+    </center>
+    
+    <form action="nprodc" method="post" enctype="multipart/form-data">
+        <table border="1" align="center" class="border border-dark">
+            <tr>
+                <td><label>Foto : </label></td>
+                <td><input type="file" name="f" value="f" id="f"></td>
+            </tr>
+            <tr>
+                <td><label>Nombre producto : </label></td>
+                <td><input type="text" name="n" id="n"></td>
+            </tr>
+            <tr>
+                <td><label>Descripcion : </label></td>
+                <td><textarea name="d" id="d"></textarea></td>
+            </tr>
+            <tr>
+                <td><label>Fecha de creacion : </label></td>
+                <td><input type="text" name="fe" id="fe"></td>
+            </tr>
+            <tr>
+                <td><label>Precio : </label></td>
+                <td><input type="text" name="p" id="p"></td>
+            </tr>
+            <tr>
+                <td><label>Stock : </label></td>
+                <td><input type="text" name="s" id="s"></td>
+            </tr>
+            <tr>
+                <td><label>Categoria ID : </label></td>
+                <td>
+                    <select name="cid" id="cid">
+                        @foreach (var item in Model)
+                        {
+                            <option value="@Html.DisplayFor(modelItem => item.id)">@Html.DisplayFor(modelItem => item.nombre)</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit" name="Nuevo" value="Nuevo" id="Nuevo" class="btn btn-success">Nuevo</button>
+                    &nbsp;
+                    <button type="reset" name="Cancelar" value="Cancelar" id="Cancelar" class="btn btn-danger">Cancelar</button>
+
+                </td>
+            </tr>
+        </table>
+    </form>
+ 
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#Nuevo").click(function () {
+
+            var fp = $("#f").val();
+            var np = $("#n").val();
+            var dp = $("#d").val();
+            var fc = $("#fe").val();
+            var pr = $("#p").val();
+            var st = $("#s").val();
+            var caid = $("#cid").val();
+
+            if (fp == null || fp == "" || np == null || np == "" || dp == null || dp == "" || fc == null || fc == "" || pr == null || pr == "" || st == null || st == "" || caid == null || caid == "")
+            {
+                alert("Debe completar los campos");
+            } else {
+                alert("Campos completos");
+            }
+
+
+
+
+
+
+
+        });
+    });
+
+
+
+
+
+</script>

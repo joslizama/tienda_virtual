@@ -1,0 +1,92 @@
+﻿
+@{
+    // Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Agregar al carro de compras</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+    <center><h3>Carro de compras</h3></center>
+
+    <center>
+        <p>
+            @Html.ActionLink("Seguir comprando", "vcat")|
+            @Html.ActionLink("Volver al inicio", "Index_usuario")|
+
+        </p>
+    </center>
+    <br />
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Foto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                double tot = 0;
+
+            }
+
+            @if (Session["carro"] != null)
+            {
+                foreach (var item in Session["carro"] as List<tienda_express.Controllers.carroitem>)
+                {
+                    tot += (double)(item.Cantidad * item.Producto.precio);
+
+                    <tr>
+                        <td>@item.Producto.id</td>
+                        <td>@item.Producto.nombre</td>
+                        <td><img src="@Url.Action("getid", "usuario", new {id = item.Producto.id }) " width="120" height="150"></td>
+                        <td>@item.Producto.precio</td>
+                        <td>@item.Cantidad</td>
+                        <td>@Html.ActionLink("Eliminar", "Eliminar", "usuario", new { id = item.Producto.id }, null)</td>
+                    </tr>
+
+                }
+
+            }
+            <tr>
+                <td><label>Total : </label></td>
+                <td colspan="4" align="center">@tot</td>
+            </tr>
+            <tr>
+                <td colspan="5" align="center">@Html.ActionLink("Terminar Compra", "Terminar_Compra", "usuario", null, null)</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

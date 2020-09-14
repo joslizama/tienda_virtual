@@ -1,0 +1,45 @@
+﻿@model tienda_express.Models.usuario
+
+@{
+    //Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+    
+    
+    
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index_admin</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+</head>
+<body>
+<center><h3>Bienvenido @Session["n"].ToString() @Session["a"].ToString()</h3></center>   
+    <center>
+    <p>
+        @Html.ActionLink("Volver al inicio", "Index_admin")|
+        @Html.ActionLink("Cerrar sesion","csession")|
+
+    </p>
+    </center>
+    <table border="1" align="center" class="border border-dark">
+    <tr>
+    <td><label><a href="@Url.Action("lcat","admin")">Listado de categorias</a></label></td>
+    <td><label><a href="@Url.Action("lprod","admin")">Listado de productos</a></label></td>
+    </tr>  
+   </table>
+</body>
+</html>

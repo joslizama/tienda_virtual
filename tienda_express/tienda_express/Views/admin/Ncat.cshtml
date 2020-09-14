@@ -1,0 +1,72 @@
+﻿@model tienda_express.Models.categoria
+
+@{
+   // Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+   
+   
+   
+   
+   
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Nueva categoria</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+
+</head>
+<body>
+<center><h3>Nueva categoria de producto</h3></center>
+@using(Html.BeginForm("ncatc","admin",FormMethod.Post))
+{
+    <table border="1" align="center" class="border border-dark">
+    <tr>
+    <td><label>Nombre : </label></td>
+    <td>@Html.TextBoxFor(x=>x.nombre)</td>
+    </tr>
+    <tr>
+    <td colspan="2" align="center">
+        <button type="submit" name="Nuevo" value="Nuevo" id="Nuevo" class="btn btn-success">Nuevo</button>
+        &nbsp;
+        <button type="reset" name="Cancelar" value="Cancelar" id="Cancelar" class="btn btn-danger">Cancelar</button>
+
+    </td>
+    </tr>
+    </table>
+}
+
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#Nuevo").click(function () {
+
+            var n = $("#nombre").val();
+
+            if (n == null || n == "")
+            {
+                alert("Debe completar los campos");
+            } else {
+               
+                alert("Campos completos");
+
+            }
+
+
+        });
+    });
+</script>

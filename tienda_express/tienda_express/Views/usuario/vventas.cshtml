@@ -1,0 +1,83 @@
+﻿@model IEnumerable<tienda_express.Models.venta>
+
+@{
+    // Layout = null;
+
+    if (Session["r"] == null)
+    {
+        Response.Redirect("Index/sistema");
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ver ventas realizadas</title>
+
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+
+
+</head>
+<body>
+    <center><h3>Ver ventas realizadas</h3></center>
+
+    <center>
+        <p>
+            @Html.ActionLink("Volver al inicio", "Index_usuario")|
+            @Html.ActionLink("Cerrar sesion", "csession")|
+
+        </p>
+    </center>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Dia de la venta</th>
+                <th scope="col">Sub total</th>
+                <th scope="col">I.V.A</th>
+                <th scope="col">Total</th>
+                <th scope="col">Rut usuario</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.dia_venta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sub_total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iva)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario_id)
+                </td>
+                <td>
+                    @Html.ActionLink("Ver detalle de la venta", "Vlvent", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

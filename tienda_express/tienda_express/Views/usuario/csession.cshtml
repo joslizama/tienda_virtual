@@ -1,0 +1,41 @@
+﻿@model tienda_express.Models.usuario
+
+@{
+    //Layout = null;
+
+    Session["r"] = null;
+    
+        
+
+    if (Session["r"] == null)
+    {
+        Session.Abandon();
+        Session.Clear();    
+        Response.Redirect("~/sistema/Index");
+        
+        
+    }
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cerrar sesion</title>
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+</head>
+<body>
+<center><h3>Sesion cerrada</h3></center>
+<center><h4><a href="@Url.Action("Index","sistema")">Volver al inicio</a></h4></center>
+
+    
+</body>
+</html>
